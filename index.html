@@ -34,7 +34,7 @@
     <div class="container content">
         <!-- Paper Title and Abstract -->
         <h1 class="text-center">Learning Trajectory-Attractor Dynamical Systems on SE(3) with Conditional Diffeomorphisms</h1>
-        <p><strong>Abstract:</strong>Dynamical system (DS)-based imitation learning enables stable motion generation. However, in practice, most methods (i) mainly guarantee convergence to a goal state rather than attraction to the demonstrated trajectory, (ii) are developed primarily in Euclidean spaces and thus do not natively model pose trajectories in SE(3), and (iii) are typically limited to a single demonstrated task with weak perception-driven adaptation. To address these limitations, this paper presents a Lie-group DS learning framework composed of Trajectory-Attractor DS (TADS) and Conditional DS Generation (CDSG). TADS couples a latent-space potential field with multiple canyon structures and a diffeomorphism, achieving global asymptotic stability and disturbance-rejecting execution with trajectory-attractor behavior, while requiring only one demonstration per attracting-trajectory direction. Built on TADS, CDSG conditions the diffeomorphism on multimodal observations to generate task-consistent stable DS online, enabling perception-driven replanning and flexible trajectory switching while preserving the stability guarantees. Simulations and real-robot experiments demonstrate robust execution under disturbances and effective adaptation to changing environments.</p>
+        <p><strong>Abstract:</strong> Dynamical system (DS)-based imitation learning enables stable motion generation. However, in practice, most methods (i) mainly guarantee convergence to a goal state rather than attraction to the demonstrated trajectory, (ii) are developed primarily in Euclidean spaces and thus do not natively model pose trajectories in SE(3), and (iii) are typically limited to a single demonstrated task with weak perception-driven adaptation. To address these limitations, this paper presents a Lie-group DS learning framework composed of Trajectory-Attractor DS (TADS) and Conditional DS Generation (CDSG). TADS couples a latent-space potential field with multiple canyon structures and a diffeomorphism, achieving global asymptotic stability and disturbance-rejecting execution with trajectory-attractor behavior, while requiring only one demonstration per attracting-trajectory direction. Built on TADS, CDSG conditions the diffeomorphism on multimodal observations to generate task-consistent stable DS online, enabling perception-driven replanning and flexible trajectory switching while preserving the stability guarantees. Simulations and real-robot experiments demonstrate robust execution under disturbances and effective adaptation to changing environments.</p>
 
         <!-- Links -->
         <div class="links my-4">
@@ -42,14 +42,16 @@
             <p><strong>GitHub Code Link:</strong><a href="https://github.com/bbg-sjtu/TADS-CDSG" target="_blank">click here</a></p>
         </div>
 
-        <!-- Algorithm Diagrams -->
-        <h2>Algorithm Diagrams</h2>
+        <!-- Method Diagrams -->
+        <h2 class="text-center mt-5">Method Diagram</h2> <!-- Add margin top here -->
         <div class="row d-flex justify-content-center">
-            <div class="col-md-5 d-flex flex-column align-items-center">
+            <div class="col-md-10 d-flex flex-column align-items-center mb-4">
                 <h3 class="text-center">Principle of TADS in Lie-group space based on diffeomorphism</h3>
                 <img src="Media/Method1.png" class="img-fluid" alt="Algorithm Diagram 1" style="max-height: 400px; object-fit: contain;">
             </div>
-            <div class="col-md-5 d-flex flex-column align-items-center">
+        </div>
+        <div class="row d-flex justify-content-center">
+            <div class="col-md-10 d-flex flex-column align-items-center">
                 <h3 class="text-center">Principle of CDSG based on TADS</h3>
                 <img src="Media/Method2.png" class="img-fluid" alt="Algorithm Diagram 2" style="max-height: 400px; object-fit: contain;">
             </div>
