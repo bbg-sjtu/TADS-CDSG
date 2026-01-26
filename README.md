@@ -18,4 +18,3 @@ The implementation of TADS-CDSG is located in the SE3_DS folder.
 The animation of the execution of diffeo_canyon_sim.py is as follows:
 
 ![overview](Media/sim_demo.gif)
-
