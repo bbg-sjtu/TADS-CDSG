@@ -1,6 +1,6 @@
 # TADS-CDSG
 
-This repository contains the code implementation for Trajectory-Attractor Dynamical System (TADS) and Conditional Dynamical System Generation (CDSG). The code provides a framework based on Lie groups for perception-driven robotic motion generation. It implements the key algorithms described in the paper and provides several examples demonstrating the use of the framework.
+This repository contains the code implementation for Trajectory-Attractor Dynamical System (TADS) and Conditional Dynamical System Generation (CDSG).
 
 ## File Structure
 The implementation of TADS-CDSG is located in the SE3_DS folder.
