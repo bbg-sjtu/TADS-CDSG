@@ -295,13 +295,21 @@
             border-bottom: 1px solid var(--line);
         }
 
-        .video-grid.final-row {
+        .video-list.final-row {
+            display: grid;
+            gap: 18px;
             margin-top: 18px;
         }
 
         .standalone-video {
-            width: min(480px, 100%);
+            width: calc((100% - 36px) / 3);
             margin: 18px auto 0;
+        }
+
+        .final-row .video-panel {
+            width: 70%;
+            margin-right: auto;
+            margin-left: auto;
         }
 
         .footer {
@@ -324,6 +332,10 @@
             .method-layout,
             .video-grid {
                 grid-template-columns: 1fr 1fr;
+            }
+
+            .standalone-video {
+                width: calc((100% - 18px) / 2);
             }
 
             .video-panel.featured {
@@ -352,6 +364,14 @@
             .method-layout,
             .video-grid {
                 grid-template-columns: 1fr;
+            }
+
+            .standalone-video {
+                width: 100%;
+            }
+
+            .final-row .video-panel {
+                width: 100%;
             }
 
             .button-link {
@@ -490,7 +510,7 @@
                     </div>
                 </article>
 
-                <div class="video-grid final-row">
+                <div class="video-list final-row">
                     <article class="video-panel">
                         <video controls preload="metadata" playsinline>
                             <source src="Media/obstacle_avoidance.mp4" type="video/mp4">
