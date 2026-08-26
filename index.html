@@ -3,140 +3,538 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Research Paper Showcase</title>
-    <!-- Bootstrap CSS -->
+    <meta name="description" content="Project page for Learning Trajectory-Attractor Dynamical Systems on SE(3) with Conditional Diffeomorphisms.">
+    <title>TADS-CDSG | SE(3) Dynamical Systems</title>
+
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
 
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']],
+                processEscapes: true
+            },
+            svg: {
+                fontCache: 'global'
+            }
+        };
+    </script>
+    <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
+
     <style>
-        /* Custom styles */
+        :root {
+            --ink: #172026;
+            --muted: #5a6673;
+            --line: #dbe3ea;
+            --paper: #f7f9fb;
+            --surface: #ffffff;
+            --accent: #1d6f8f;
+            --accent-strong: #105d78;
+            --warm: #b65632;
+            --shadow: 0 18px 46px rgba(25, 42, 57, 0.13);
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
         body {
-            font-family: Arial, sans-serif;
-            margin: 20px;
+            margin: 0;
+            color: var(--ink);
+            background: var(--paper);
+            font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+            line-height: 1.65;
         }
-        .content {
-            max-width: 1200px;
-            margin: auto;
+
+        a {
+            color: var(--accent-strong);
+            text-decoration-thickness: 0.08em;
+            text-underline-offset: 0.18em;
         }
-        .video-title {
+
+        .page-shell {
+            overflow: hidden;
+        }
+
+        .hero {
+            min-height: 88vh;
+            display: grid;
+            align-items: center;
+            color: #ffffff;
+            background:
+                linear-gradient(90deg, rgba(14, 23, 29, 0.92) 0%, rgba(14, 23, 29, 0.78) 42%, rgba(14, 23, 29, 0.34) 100%),
+                url("Media/sim_demo.gif") center / cover no-repeat;
+        }
+
+        .hero-inner {
+            width: min(1180px, calc(100% - 40px));
+            margin: 0 auto;
+            padding: 72px 0 96px;
+        }
+
+        .kicker {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 22px;
+            color: rgba(255, 255, 255, 0.78);
+            font-size: 0.78rem;
+            font-weight: 700;
+            letter-spacing: 0;
+            text-transform: uppercase;
+        }
+
+        .kicker::before {
+            width: 42px;
+            height: 2px;
+            content: "";
+            background: #64c7b6;
+        }
+
+        .hero h1 {
+            max-width: 980px;
+            margin: 0;
+            font-size: clamp(2.2rem, 5vw, 5.1rem);
+            font-weight: 760;
+            line-height: 1.02;
+        }
+
+        .hero-subtitle {
+            max-width: 760px;
+            margin: 26px 0 0;
+            color: rgba(255, 255, 255, 0.82);
+            font-size: clamp(1rem, 2vw, 1.22rem);
+        }
+
+        .hero-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-top: 34px;
+        }
+
+        .button-link {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 46px;
+            padding: 0 18px;
+            border: 1px solid rgba(255, 255, 255, 0.35);
+            border-radius: 8px;
+            color: #ffffff;
+            font-weight: 700;
+            text-decoration: none;
+            backdrop-filter: blur(12px);
+            background: rgba(255, 255, 255, 0.1);
+            transition: transform 160ms ease, background 160ms ease, border-color 160ms ease;
+        }
+
+        .button-link:hover {
+            color: #ffffff;
+            transform: translateY(-2px);
+            border-color: rgba(255, 255, 255, 0.7);
+            background: rgba(255, 255, 255, 0.18);
+        }
+
+        .button-link.primary {
+            border-color: #64c7b6;
+            background: #1d6f8f;
+        }
+
+        .main-content {
+            width: min(1180px, calc(100% - 40px));
+            margin: -58px auto 0;
+            position: relative;
+            z-index: 2;
+        }
+
+        .abstract-panel {
+            padding: clamp(24px, 4vw, 44px);
+            border: 1px solid rgba(219, 227, 234, 0.86);
+            border-radius: 8px;
+            background: rgba(255, 255, 255, 0.96);
+            box-shadow: var(--shadow);
+        }
+
+        .section {
+            padding: 72px 0 0;
+        }
+
+        .section-heading {
+            display: flex;
+            align-items: end;
+            justify-content: space-between;
+            gap: 24px;
+            margin-bottom: 24px;
+            border-bottom: 1px solid var(--line);
+            padding-bottom: 16px;
+        }
+
+        .section-label {
+            margin: 0 0 6px;
+            color: var(--warm);
+            font-size: 0.78rem;
+            font-weight: 800;
+            letter-spacing: 0;
+            text-transform: uppercase;
+        }
+
+        h2 {
+            margin: 0;
+            font-size: clamp(1.55rem, 3vw, 2.35rem);
+            line-height: 1.16;
+            font-weight: 760;
+        }
+
+        h3 {
+            margin: 0;
+            font-size: 1.02rem;
+            line-height: 1.35;
+            font-weight: 730;
+        }
+
+        .abstract-panel p {
+            margin: 0;
+            color: #26333d;
+            font-size: 1.02rem;
+        }
+
+        .abstract-title {
+            margin-bottom: 14px;
+            color: var(--accent-strong);
+            font-size: 0.9rem;
+            font-weight: 800;
+            text-transform: uppercase;
+        }
+
+        .result-grid {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 16px;
+            margin-top: 18px;
+        }
+
+        .result-item {
+            min-height: 132px;
+            padding: 18px;
+            border: 1px solid var(--line);
+            border-radius: 8px;
+            background: #ffffff;
+            box-shadow: 0 10px 26px rgba(24, 38, 52, 0.06);
+        }
+
+        .result-value {
+            display: block;
+            color: var(--accent-strong);
+            font-size: clamp(1.7rem, 3vw, 2.45rem);
+            font-weight: 800;
+            line-height: 1;
+        }
+
+        .result-label {
+            display: block;
             margin-top: 10px;
-            text-align: center;
-            font-weight: bold;
+            color: var(--muted);
+            font-size: 0.94rem;
+            line-height: 1.45;
         }
-        .video-container {
-            margin-bottom: 20px;
+
+        .method-layout {
+            display: grid;
+            grid-template-columns: minmax(0, 1.55fr) minmax(280px, 0.9fr);
+            gap: 22px;
+            align-items: stretch;
         }
-        h1, h2 {
-            color: #333;
+
+        .figure-panel,
+        .video-panel {
+            overflow: hidden;
+            border: 1px solid var(--line);
+            border-radius: 8px;
+            background: var(--surface);
+            box-shadow: 0 12px 32px rgba(24, 38, 52, 0.08);
+        }
+
+        .figure-media {
+            display: grid;
+            min-height: 260px;
+            place-items: center;
+            padding: 18px;
+            background: #eef4f5;
+        }
+
+        .figure-media img {
+            width: 100%;
+            height: auto;
+            display: block;
+            border-radius: 6px;
+        }
+
+        .figure-caption,
+        .video-caption {
+            padding: 16px 18px 18px;
+        }
+
+        .figure-caption p,
+        .video-caption p {
+            margin: 6px 0 0;
+            color: var(--muted);
+            font-size: 0.94rem;
+            line-height: 1.5;
+        }
+
+        .video-grid {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 22px;
+        }
+
+        .video-panel.featured {
+            grid-column: span 2;
+        }
+
+        video {
+            display: block;
+            width: 100%;
+            aspect-ratio: 16 / 9;
+            background: #111820;
+            object-fit: contain;
+        }
+
+        .footer {
+            margin-top: 84px;
+            padding: 34px 0 44px;
+            border-top: 1px solid var(--line);
+            color: var(--muted);
+            font-size: 0.95rem;
+        }
+
+        @media (max-width: 991px) {
+            .hero {
+                min-height: 76vh;
+                background-position: center;
+            }
+
+            .main-content {
+                margin-top: -38px;
+            }
+
+            .method-layout,
+            .video-grid,
+            .result-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .video-panel.featured {
+                grid-column: span 1;
+            }
+        }
+
+        @media (max-width: 680px) {
+            .hero-inner,
+            .main-content {
+                width: min(100% - 28px, 1180px);
+            }
+
+            .hero h1 {
+                font-size: clamp(2rem, 11vw, 3rem);
+            }
+
+            .section {
+                padding-top: 52px;
+            }
+
+            .section-heading {
+                display: block;
+            }
+
+            .method-layout,
+            .video-grid,
+            .result-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .button-link {
+                width: 100%;
+            }
         }
     </style>
 </head>
 <body>
-    <div class="container content">
-        <!-- Paper Title and Abstract -->
-        <h1 class="text-center">Learning Trajectory-Attractor Dynamical Systems on SE(3) with Conditional Diffeomorphisms</h1>
-        <p><strong>Abstract:</strong> Dynamical-system (DS) imitation learning enables stable motion generation, but existing methods often provide only goal convergence, are commonly formulated in Euclidean spaces rather than directly on $\mathrm{SE}(3)$, and have limited perception-driven adaptability. This paper proposes an $\mathrm{SE}(3)$ DS learning framework integrating Trajectory-Attractor Dynamical Systems (TADS) and Conditional DS Generation (CDSG). TADS combines a canyon-shaped latent potential field with a diffeomorphic mapping on $\mathrm{SE}(3)$, yielding trajectory attraction, disturbance recovery, and almost global asymptotic stability under the principal-branch and unique nearest-canyon assumptions. Built on TADS, CDSG conditions the diffeomorphism on multimodal observations to generate task-consistent DSs online; for each fixed observation, the generated DS preserves the TADS stability property, enabling perception-driven replanning and trajectory switching. In real-robot peg-in-hole and bottle-cap assembly, TADS achieves $100\%$ success under all tested disturbance levels, with final position and orientation errors below $3.73$~mm and $1.54^\circ$, respectively; under strong disturbances, recovery times are $1.55$~s and $1.68$~s, whereas non-TADS baselines drop to $44$--$72\%$ and $28$--$54\%$ success on the two tasks. In observation-conditioned tasks, CDSG achieves $100\%$ success over $50$ human--robot collaboration trials and $90\%$ over $20$ unseen moving-target positions. </p>
+    <div class="page-shell">
+        <header class="hero">
+            <div class="hero-inner">
+                <h1>Learning Trajectory-Attractor Dynamical Systems on SE(3) with Conditional Diffeomorphisms</h1>
+                <p class="hero-subtitle">
+                    A trajectory-attracting dynamical-system framework for stable SE(3) robot motion generation,
+                    disturbance recovery, and perception-conditioned replanning.
+                </p>
+                <div class="hero-actions" aria-label="Project links">
+                    <a class="button-link primary" href="https://github.com/bbg-sjtu/TADS-CDSG" target="_blank" rel="noopener">GitHub Code</a>
+                    <a class="button-link" href="#method">Method</a>
+                    <a class="button-link" href="#videos">Videos</a>
+                </div>
+            </div>
+        </header>
 
-        <!-- Links -->
-        <div class="links my-4">
-            <!-- <p><strong>Paper Link:</strong><a href="https://example.com/your-paper-link" target="_blank">click here</a></p> -->
-            <p><strong>GitHub Code Link:</strong><a href="https://github.com/bbg-sjtu/TADS-CDSG" target="_blank">click here</a></p>
-        </div>
+        <main class="main-content">
+            <section class="abstract-panel" aria-labelledby="abstract-title">
+                <div class="abstract-title" id="abstract-title">Abstract</div>
+                <p>
+                    Dynamical-system (DS) imitation learning enables stable motion generation, but existing methods often provide only goal convergence, are commonly formulated in Euclidean spaces rather than directly on $\mathrm{SE}(3)$, and have limited perception-driven adaptability. This paper proposes an $\mathrm{SE}(3)$ DS learning framework integrating Trajectory-Attractor Dynamical Systems (TADS) and Conditional DS Generation (CDSG). TADS combines a canyon-shaped latent potential field with a diffeomorphic mapping on $\mathrm{SE}(3)$, yielding trajectory attraction, disturbance recovery, and almost global asymptotic stability under the principal-branch and unique nearest-canyon assumptions. Built on TADS, CDSG conditions the diffeomorphism on multimodal observations to generate task-consistent DSs online; for each fixed observation, the generated DS preserves the TADS stability property, enabling perception-driven replanning and trajectory switching. In real-robot peg-in-hole and bottle-cap assembly, TADS achieves $100\%$ success under all tested disturbance levels, with final position and orientation errors below $3.73~\mathrm{mm}$ and $1.54^\circ$, respectively; under strong disturbances, recovery times are $1.55~\mathrm{s}$ and $1.68~\mathrm{s}$, whereas non-TADS baselines drop to $44$--$72\%$ and $28$--$54\%$ success on the two tasks. In observation-conditioned tasks, CDSG achieves $100\%$ success over $50$ human--robot collaboration trials and $90\%$ over $20$ unseen moving-target positions.
+                </p>
+            </section>
 
-        <!-- Algorithm Diagrams -->
-        <h2>Method Diagrams</h2>
-        <div class="row">
-            <div class="col-md-8 text-center">  <!-- Add text-center to the col to center the content -->
-                <h3>Principle of TADS in Lie-group space based on diffeomorphism</h3>
-                <img src="Media/Method1.png" class="img-fluid mx-auto d-block" alt="Algorithm Diagram 1">
-            </div>
-            <div class="col-md-4 text-center">  <!-- Add text-center to the col to center the content -->
-                <h3>Principle of CDSG based on TADS</h3>
-                <img src="Media/Method2.png" class="img-fluid mx-auto d-block" alt="Algorithm Diagram 2">
-            </div>
-        </div>
+            <section class="result-grid" aria-label="Key experimental results">
+                <div class="result-item">
+                    <span class="result-value">$100\%$</span>
+                    <span class="result-label">success under all tested disturbance levels in real-robot peg-in-hole and bottle-cap assembly</span>
+                </div>
+                <div class="result-item">
+                    <span class="result-value">$1.55~\mathrm{s}$ / $1.68~\mathrm{s}$</span>
+                    <span class="result-label">recovery time under strong disturbances for the two assembly tasks</span>
+                </div>
+                <div class="result-item">
+                    <span class="result-value">$50 + 20$</span>
+                    <span class="result-label">conditioned trials spanning human-robot collaboration and unseen moving-target positions</span>
+                </div>
+            </section>
 
-        <!-- Experimental Videos -->
-        <h2 class="mt-4">Experimental Videos</h2>
-        <div class="row">
-            <!-- First 6 videos: 3 per row, 2 rows -->
-            <div class="col-md-4 video-container">
-                <div class="video-title">Circular Shaft-Hole Assembly Experiment (1)</div>
-                <video width="100%" controls>
-                    <source src="Media/circle_assembly_1.mp4" type="video/mp4">
-                </video>
-            </div>
-            <div class="col-md-4 video-container">
-                <div class="video-title">Square Shaft-Hole Assembly Experiment (1)</div>
-                <video width="100%" controls>
-                    <source src="Media/square_assembly_1.mp4" type="video/mp4">
-                </video>
-            </div>
-            <div class="col-md-4 video-container">
-                <div class="video-title">Triangular Shaft-Hole Assembly Experiment (1)</div>
-                <video width="100%" controls>
-                    <source src="Media/triangle_assembly_1.mp4" type="video/mp4">
-                </video>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-4 video-container">
-                <div class="video-title">Circular Shaft-Hole Assembly Experiment (2)</div>
-                <video width="100%" controls>
-                    <source src="Media/circle_assembly_2.mp4" type="video/mp4">
-                </video>
-            </div>
-            <div class="col-md-4 video-container">
-                <div class="video-title">Square Shaft-Hole Assembly Experiment (2)</div>
-                <video width="100%" controls>
-                    <source src="Media/square_assembly_2.mp4" type="video/mp4">
-                </video>
-            </div>
-            <div class="col-md-4 video-container">
-                <div class="video-title">Triangular Shaft-Hole Assembly Experiment (2)</div>
-                <video width="100%" controls>
-                    <source src="Media/triangle_assembly_2.mp4" type="video/mp4">
-                </video>
-            </div>
-        </div>
+            <section class="section" id="method" aria-labelledby="method-title">
+                <div class="section-heading">
+                    <div>
+                        <p class="section-label">Method</p>
+                        <h2 id="method-title">TADS and Conditional DS Generation</h2>
+                    </div>
+                </div>
 
-        <!-- Next 4 videos: each in a separate row -->
-        <div class="row">
-            <div class="col-md-4 video-container">
-                <div class="video-title">Bottle Cap Assembly Experiment</div>
-                <video width="100%" controls>
-                    <source src="Media/bottle_assembly.mp4" type="video/mp4">
-                </video>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-6 video-container">
-                <div class="video-title">Shaft-Hole Assembly Experiment with Dynamic Obstacle Avoidance</div>
-                <video width="100%" controls>
-                    <source src="Media/obstacle_avoidance.mp4" type="video/mp4">
-                </video>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-6 video-container">
-                <div class="video-title">Human-Robot Collaboration Experiment</div>
-                <video width="100%" controls>
-                    <source src="Media/human_robot.mp4" type="video/mp4">
-                </video>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-6 video-container">
-                <div class="video-title">Moving-target Assembly Experiment</div>
-                <video width="100%" controls>
-                    <source src="Media/sliding_assembly.mp4" type="video/mp4">
-                </video>
-            </div>
-        </div>
+                <div class="method-layout">
+                    <article class="figure-panel">
+                        <div class="figure-media">
+                            <img src="Media/Method1.png" alt="Principle of TADS in Lie-group space based on diffeomorphism">
+                        </div>
+                        <div class="figure-caption">
+                            <h3>Principle of TADS in Lie-group space</h3>
+                            <p>Diffeomorphic mapping connects the learned trajectory-attractor dynamics with stable motion generation on $\mathrm{SE}(3)$.</p>
+                        </div>
+                    </article>
+
+                    <article class="figure-panel">
+                        <div class="figure-media">
+                            <img src="Media/Method2.png" alt="Principle of CDSG based on TADS">
+                        </div>
+                        <div class="figure-caption">
+                            <h3>Principle of CDSG based on TADS</h3>
+                            <p>Multimodal observations condition the diffeomorphism so the robot can switch and replan online while preserving stability.</p>
+                        </div>
+                    </article>
+                </div>
+            </section>
+
+            <section class="section" id="videos" aria-labelledby="videos-title">
+                <div class="section-heading">
+                    <div>
+                        <p class="section-label">Experiments</p>
+                        <h2 id="videos-title">Robot Demonstrations</h2>
+                    </div>
+                </div>
+
+                <div class="video-grid">
+                    <article class="video-panel">
+                        <video controls preload="metadata" playsinline>
+                            <source src="Media/circle_assembly_1.mp4" type="video/mp4">
+                        </video>
+                        <div class="video-caption">
+                            <h3>Circular shaft-hole assembly (1)</h3>
+                        </div>
+                    </article>
+
+                    <article class="video-panel">
+                        <video controls preload="metadata" playsinline>
+                            <source src="Media/square_assembly_1.mp4" type="video/mp4">
+                        </video>
+                        <div class="video-caption">
+                            <h3>Square shaft-hole assembly (1)</h3>
+                        </div>
+                    </article>
+
+                    <article class="video-panel">
+                        <video controls preload="metadata" playsinline>
+                            <source src="Media/triangle_assembly_1.mp4" type="video/mp4">
+                        </video>
+                        <div class="video-caption">
+                            <h3>Triangular shaft-hole assembly (1)</h3>
+                        </div>
+                    </article>
+
+                    <article class="video-panel">
+                        <video controls preload="metadata" playsinline>
+                            <source src="Media/circle_assembly_2.mp4" type="video/mp4">
+                        </video>
+                        <div class="video-caption">
+                            <h3>Circular shaft-hole assembly (2)</h3>
+                        </div>
+                    </article>
+
+                    <article class="video-panel">
+                        <video controls preload="metadata" playsinline>
+                            <source src="Media/square_assembly_2.mp4" type="video/mp4">
+                        </video>
+                        <div class="video-caption">
+                            <h3>Square shaft-hole assembly (2)</h3>
+                        </div>
+                    </article>
+
+                    <article class="video-panel">
+                        <video controls preload="metadata" playsinline>
+                            <source src="Media/triangle_assembly_2.mp4" type="video/mp4">
+                        </video>
+                        <div class="video-caption">
+                            <h3>Triangular shaft-hole assembly (2)</h3>
+                        </div>
+                    </article>
+
+                    <article class="video-panel featured">
+                        <video controls preload="metadata" playsinline>
+                            <source src="Media/bottle_assembly.mp4" type="video/mp4">
+                        </video>
+                        <div class="video-caption">
+                            <h3>Bottle-cap assembly</h3>
+                        </div>
+                    </article>
+
+                    <article class="video-panel">
+                        <video controls preload="metadata" playsinline>
+                            <source src="Media/obstacle_avoidance.mp4" type="video/mp4">
+                        </video>
+                        <div class="video-caption">
+                            <h3>Dynamic obstacle avoidance</h3>
+                        </div>
+                    </article>
+
+                    <article class="video-panel">
+                        <video controls preload="metadata" playsinline>
+                            <source src="Media/human_robot.mp4" type="video/mp4">
+                        </video>
+                        <div class="video-caption">
+                            <h3>Human-robot collaboration</h3>
+                        </div>
+                    </article>
+
+                    <article class="video-panel featured">
+                        <video controls preload="metadata" playsinline>
+                            <source src="Media/sliding_assembly.mp4" type="video/mp4">
+                        </video>
+                        <div class="video-caption">
+                            <h3>Moving-target assembly</h3>
+                        </div>
+                    </article>
+                </div>
+            </section>
+        </main>
     </div>
 
-    <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
-
-
