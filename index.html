@@ -59,33 +59,15 @@
 
         .hero {
             min-height: 88vh;
-            position: relative;
             display: grid;
             align-items: center;
             color: #ffffff;
-            background: #101820;
-        }
-
-        .hero::after {
-            position: absolute;
-            inset: 0;
-            z-index: 1;
-            content: "";
-            background: linear-gradient(90deg, rgba(14, 23, 29, 0.92) 0%, rgba(14, 23, 29, 0.78) 42%, rgba(14, 23, 29, 0.34) 100%);
-        }
-
-        .hero-video {
-            position: absolute;
-            inset: 0;
-            z-index: 0;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
+            background:
+                linear-gradient(90deg, rgba(14, 23, 29, 0.92) 0%, rgba(14, 23, 29, 0.78) 42%, rgba(14, 23, 29, 0.34) 100%),
+                url("Media/sim_demo.gif") center / cover no-repeat;
         }
 
         .hero-inner {
-            position: relative;
-            z-index: 2;
             width: min(1180px, calc(100% - 40px));
             margin: 0 auto;
             padding: 72px 0 96px;
@@ -289,7 +271,13 @@
         .video-grid {
             display: grid;
             grid-template-columns: repeat(3, minmax(0, 1fr));
-            gap: 22px;
+            gap: 18px;
+        }
+
+        .video-section {
+            max-width: 980px;
+            margin-right: auto;
+            margin-left: auto;
         }
 
         .video-panel.featured {
@@ -308,12 +296,12 @@
         }
 
         .video-grid.final-row {
-            margin-top: 22px;
+            margin-top: 18px;
         }
 
         .standalone-video {
-            width: min(760px, 100%);
-            margin: 22px auto 0;
+            width: min(480px, 100%);
+            margin: 18px auto 0;
         }
 
         .footer {
@@ -375,9 +363,6 @@
 <body>
     <div class="page-shell">
         <header class="hero">
-            <video class="hero-video" autoplay muted loop playsinline preload="metadata" aria-hidden="true">
-                <source src="Media/obstacle_avoidance.mp4" type="video/mp4">
-            </video>
             <div class="hero-inner">
                 <h1>Learning Trajectory-Attractor Dynamical Systems on SE(3) with Conditional Diffeomorphisms</h1>
                 <p class="hero-subtitle">
@@ -431,7 +416,7 @@
                 </div>
             </section>
 
-            <section class="section" id="videos" aria-labelledby="videos-title">
+            <section class="section video-section" id="videos" aria-labelledby="videos-title">
                 <div class="section-heading">
                     <div>
                         <p class="section-label">Experiments</p>
